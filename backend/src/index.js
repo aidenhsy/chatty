@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 const app = express();
 
 dotenv.config();
@@ -21,6 +22,7 @@ mongoose
   });
 
 app.use('/api/users/', userRoutes);
+app.use('/api/messages/', messageRoutes);
 
 app.listen(4000, () => {
   console.log('listening on 4000');
