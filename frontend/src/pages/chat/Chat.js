@@ -14,6 +14,7 @@ const Chat = ({ match }) => {
   const [receiver, setReceiver] = useState({});
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [timer, setTimer] = useState(null);
 
   useEffect(() => {
     const fetchReceiver = async () => {
@@ -32,6 +33,11 @@ const Chat = ({ match }) => {
       setMessages(data.messages);
     };
     fetchMessages();
+    let newTimer = setInterval(fetchMessages, 1000);
+    setTimer(newTimer);
+    return () => {
+      clearInterval(timer);
+    };
   }, [match, user]);
 
   const sendMessage = async (e) => {
